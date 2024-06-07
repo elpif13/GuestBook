@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" />
+    <title>Guest Book</title>
+    <style>
+        /* CSS code */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container_wrapper {
+            text-align: center;
+        }
+
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 50px;
+            margin-top: 0;
+            /* Remove default margin */
+
+
+        }
+
+        .button {
+            display: block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #b17d7d;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #535353;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container_wrapper">
+
+        <h1 class="title">Guest Book</h1>
+
+        <button class="button" id="entries" data-url="{% url 'entries-list' %}">All Entries</button>
+
+        <button class="button" id="create-entry" data-url="{% url 'create-entry' %}">Create Entry</button>
+
+        <button class="button" id="all-users-data" data-url="{% url 'users-list' %}">Latest Entry Of Each
+            User</button>
+    </div>
+
+    <script>
+        // JavaScript code for button clicks
+        document.querySelectorAll('.button').forEach(button => {
+            button.addEventListener('click', function () {
+                var url = this.getAttribute('data-url');
+                window.location.href = url;
+            });
+        });
+    </script>
+</body>
+
+</html>

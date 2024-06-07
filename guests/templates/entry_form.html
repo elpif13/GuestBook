@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Form</title>
+    <style>
+        /* Add your custom CSS styles here */
+        .form_container {
+            width: 450px;
+            margin: 0 auto;
+            padding: 20px 10px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form_container_wrapper {
+            height: 350px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            margin: auto;
+        }
+
+        .form_container label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            width: 100px;
+        }
+
+        .form_container .column {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .form_container input[type="text"],
+        .form_container textarea {
+            width: calc(100% - 200px);
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form_container textarea {
+            height: 100px;
+        }
+
+        .form_container input[type="submit"] {
+            width: 150px;
+            height: 40px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #b17d7d;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form_container input[type="submit"]:hover {
+            background-color: #535353;
+        }
+
+        .button {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form_container_wrapper">
+        <div class="form_container">
+            <form id="submitForm" style="display: flex; flex-direction: column;">
+                {% csrf_token %}
+
+                <div class="column">
+                    <label for="username">Name:</label>
+                    <input type="text" id="username" name="username" placeholder="Enter Username" required>
+                </div>
+
+                <div class="column">
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" name="subject" placeholder="Enter Subject" required>
+                </div>
+
+                <div class="column">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" placeholder="Enter Message" required></textarea>
+                </div>
+
+                <div class="button">
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        // JavaScript for form submission using AJAX
+        document.getElementById("submitForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Get form data
+            var formData = new FormData(this);
+
+            // Send form data via AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "{% url 'create-entry' %}", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // Handle successful response
+                        alert("Form submitted successfully!");
+                        // Redirect to home page
+                        window.location.href = "{% url 'home' %}";
+                    } else {
+                        // Handle error response
+                        alert("Error: " + xhr.responseText);
+                    }
+                }
+            };
+            xhr.send(formData);
+        });
+    </script>
+
+</body>
+
+</html>

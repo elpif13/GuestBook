@@ -1,0 +1,47 @@
+<style>
+  /* Styling for the button */
+  #home {
+    padding: 10px 20px;
+    /* Adding padding to increase size */
+    font-size: 18px;
+    /* Increasing font size */
+    background-color: #b17d7d;
+    /* Green background color */
+    color: white;
+    /* White text color */
+    border: none;
+    /* Removing border */
+    border-radius: 5px;
+    /* Adding border radius */
+    cursor: pointer;
+    /* Changing cursor to pointer on hover */
+  }
+
+  /* Hover effect */
+  #home:hover {
+    background-color: #535353;
+    /* Darker green on hover */
+  }
+</style>
+
+<button id="home" data-url="{% url 'home' %}">Home</button>
+
+<script>
+  document.getElementById("home").addEventListener("click", function () {
+    var url = this.getAttribute("data-url");
+    window.location.href = url;
+  });
+</script>
+<div>
+
+  {% for entries in entries %}
+
+  <div><span style="color:rgb(83, 82, 158)">Username:</span> {{entries.username}}</div>
+  <div><span style="color:rgb(83, 82, 158)">Latest Entry:</span> {{entries.user_entries__subject}} |
+    {{entries.user_entries__message}}</div>
+
+  <hr>
+
+  {% endfor %}
+
+</div>
