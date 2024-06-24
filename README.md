@@ -70,7 +70,7 @@ This repository contains the backend implementation of a GuestBook. It provides 
 ```
 
 3. Get Users Data : This endpoint returns data for each user, including the total count of messages and details of the user's last entry. The last entry includes the subject and message concatenated by a '|'. Pagination is not applied to this endpoint.
- + Endpoint: /api/users
+ + Endpoint: /api/get-users-list
  + Method: GET
 
 **Response:**
