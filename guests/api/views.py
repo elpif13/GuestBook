@@ -12,6 +12,8 @@ from guests.models import Entry, User
 
 from .serializers import CreateEntrySerializer, EntrySerializer
 
+from django.db import connection
+
 # class based views are views as pyhton objects
 
 
@@ -70,6 +72,7 @@ class UsersListView(ListAPIView):  # permission
             )
             .values("username", "last_entry")
         )
+        print(entries.query)
         entries = {"users": entries}
         return Response(entries)
 
